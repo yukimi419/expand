@@ -1,0 +1,68 @@
+/* 吹き出し本体 - 枠線付きの吹き出し */
+.balloon2{
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ca8888;
+  border-radius: 10px;         /* 角丸を指定 */
+}
+/* 三角アイコン - 枠線付きの吹き出し */
+.balloon2::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  right: -15px;
+  top: 20px;
+  border-left: 15px solid #ca8888;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+.balloon2::after{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  right: -12px;
+  top: 20px;
+  border-left: 15px solid #fff;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+#header{
+  background-color: rgba(0, 209, 255, 1);
+  background-image: url(../img/headerbg.png);
+}
+
+.index-body{
+  font-size: 60%;
+}
+
+.regi-red{
+  color: red;
+}
+
+.regi-grey{
+  color: #696969;
+}
+
+.article-d{
+  color: red;
+}
+
+.top-new{
+  background-color: #fff;
+}
+
+.genre{
+  font-size: 130%;
+}
+
+.top-image{
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
