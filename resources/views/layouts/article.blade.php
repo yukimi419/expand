@@ -36,7 +36,12 @@
             statusbar: false,
             force_br_newlines : true,
             force_p_newlines : false,
-            forced_root_block : 'div'
+            forced_root_block : 'div',
+            mobile : {
+                theme: 'mobile',
+                plugins: [ 'autosave', 'jbimages', 'autolink' ],
+                toolbar: [ 'undo', 'bold', 'italic', 'styleselect','image' ]
+            }
         });
     </script>
     
