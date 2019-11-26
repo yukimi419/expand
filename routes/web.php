@@ -35,7 +35,7 @@ Route::group(['prefix' => 'user','middleware' => 'auth'], function() {
 });
 
 Route::get('article/{article}', 'User\ArticleController@show');
-Route::get('article/genre/music', 'User\ArticleController@music');
+Route::get('article/genre/{genre}', 'User\ArticleController@genre');
 
 Route::get('profile/{user}', 'User\UserController@show')->name('profile.show');
 

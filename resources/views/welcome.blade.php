@@ -27,7 +27,7 @@
                             @elseif($article->genre == "cinema")
                                 <a href="#" class="badge badge-secondary align-middle">映画</a><br>
                             @elseif($article->genre == "anime")
-                                <a href="#" class="badge badge-mazenta align-middle">アニメ</a><br>    
+                                <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-mazenta align-middle">アニメ</a><br>    
                             @elseif($article->genre == "game")
                                 <a href="#" class="badge badge-success align-middle">ゲーム</a><br>
                             @elseif($article->genre == "comic")

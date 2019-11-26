@@ -65,7 +65,7 @@
                             <label for="twitter_id" class="col-md-5 col-lg-4 col-form-label text-md-right">Twitterアカウント</label>
 
                             <div class="col-md-7 col-lg-6">
-                                <input id="twitter_id" type="text" class="form-control" name="twitter_id" value="{{ old('twitter_id') }}" required autocomplete="twitter_id">
+                                <input id="twitter_id" type="text" class="form-control" name="twitter_id" value="{{ old('twitter_id') }}" autocomplete="twitter_id">
                             </div>
                         </div>
                         

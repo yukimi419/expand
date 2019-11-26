@@ -84,9 +84,9 @@ class ArticleController extends Controller
         return view('user.article.show', ['article' => $article]);
   }
   
-   public function music(Article $article) 
+   public function genre($genre) 
   {
-        $posts = Article::where('genre','music')->latest('created_at')->paginate(10);
+        $posts = Article::where('genre', $genre)->latest('created_at')->paginate(10);
         return view('user.article.refine', ['posts' => $posts]);
   }
   

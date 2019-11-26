@@ -27,12 +27,16 @@
         tinymce.init({
             selector : 'textarea',
             plugins  : 'jbimages link autolink preview textcolor',
-            toolbar1  : 'bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages | preview',
+            toolbar1  : 'bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages',
             toolbar2  : 'undo redo | styleselect | forecolor | fontsizeselect',
             menubar  : false,
             relative_urls : false,
             language : 'ja',
-            branding: false
+            branding: false,
+            statusbar: false,
+            force_br_newlines : true,
+            force_p_newlines : false,
+            forced_root_block : 'div'
         });
     </script>
     
