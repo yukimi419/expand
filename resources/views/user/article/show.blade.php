@@ -28,7 +28,7 @@
                             <a href="#" class="badge badge-dark align-middle genre">裏ワザ</a>
                         @endif
                     </div>
-                    <div class="card-body">
+                    <div class="card-body body-size">
                         {!! $article->body !!}
                         <br>
                         <div class="text-right"><a href="{{ url('profile/'.$article->user->id) }}">{{ $article->user->name }}</a></div>

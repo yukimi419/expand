@@ -66,3 +66,8 @@
   height: 200px;
   object-fit: contain;
 }
+
+.body-size img{
+  max-width: 90%;
+  height: auto;
+}

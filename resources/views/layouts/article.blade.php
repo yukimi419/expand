@@ -41,7 +41,8 @@
                 theme: 'mobile',
                 plugins: [ 'autosave', 'jbimages', 'autolink' ],
                 toolbar: [ 'undo', 'bold', 'italic', 'styleselect','jbimages' ]
-            }
+            },
+            images_upload_url: 'postAcceptor.php'
         });
     </script>
     
