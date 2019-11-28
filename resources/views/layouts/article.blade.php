@@ -40,7 +40,7 @@
             mobile : {
                 theme: 'mobile',
                 plugins: [ 'autosave', 'jbimages', 'autolink' ],
-                toolbar: [ 'undo', 'bold', 'italic', 'styleselect','jbimages' ]
+                toolbar: [ 'undo', 'bold', 'italic', 'styleselect','image' ]
             },
             images_upload_url: 'postAcceptor.php'
         });
