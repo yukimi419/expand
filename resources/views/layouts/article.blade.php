@@ -26,6 +26,8 @@
     <script type="text/javascript">
         tinymce.init({
             selector : 'textarea',
+            content_css:"{{ secure_asset('css/balloon.css') }}",
+            body_class:"mobtext",
             plugins  : 'jbimages link autolink preview textcolor',
             toolbar1  : 'bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages',
             toolbar2  : 'undo redo | styleselect | forecolor | fontsizeselect',
@@ -78,6 +80,11 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    @if(Auth::user()->image_path == 1)
+                                        <img src="{{$path}}{{Auth::user()->id}}.jpg?{{time()}}" class="rounded-circle" width="30px" height="30px">
+                                    @else
+                                        <img src="{{ asset('/img/noimage.jpg') }}" class="rounded-circle" width="30px" height="30px">
+                                    @endif 
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -85,6 +92,7 @@
                                     <a class="dropdown-item" href="{{ url('/user/article/create') }}"><i class="fas fa-pen"></i> 記事を書く</a>
                                     <a class="dropdown-item" href="{{ url('/user/article/index') }}"><i class="fas fa-book-open"></i> 記事一覧</a>
                                     <a class="dropdown-item" href="{{ url('/user/profile/'.Auth::id().'/edit') }}"><i class="fas fa-address-card"></i> プロフィール編集</a>
+                                    <a class="dropdown-item mob-text" href="{{ url('/user/article/likes/'.Auth::id()) }}"><i>♥</i> お気に入り記事</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -37,6 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    protected $dates = ['year_date'];
+    
     public function articls()
     {
         return $this->hasMany('App\Article')->latest();
@@ -46,5 +48,11 @@ class User extends Authenticatable
         $id = ($id) ? $id : $this->id;
         return $id == config('admin_id');
     }
+    
+    public function likes()
+    {
+      return $this->hasMany(Like::class);
+    }
+    
     
 }

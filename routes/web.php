@@ -13,9 +13,9 @@
 
 Route::get('/', 'TopController@show');
 
-Route::get('/introduction', function () {
-    return view('introduction');
-});
+Route::get('/introduction', 'TopController@introduction');
+
+Route::get('article/search', 'User\ArticleController@search');
 
 Auth::routes();
 
@@ -32,11 +32,18 @@ Route::group(['prefix' => 'user','middleware' => 'auth'], function() {
     
     Route::get('profile/{user}/edit', 'User\UserController@edit');
     Route::put('profile/{user}', 'User\UserController@update');
+    Route::get('article/likes/{user}', 'User\ArticleController@likes');
 });
 
 Route::get('article/{article}', 'User\ArticleController@show');
 Route::get('article/genre/{genre}', 'User\ArticleController@genre');
+Route::get('article/monthly/{user}/{monthly}', 'User\ArticleController@monthly');
 
 Route::get('profile/{user}', 'User\UserController@show')->name('profile.show');
+
+Route::post('/article/{article}/likes', 'LikesController@store');
+Route::post('/article/{article}/likes/{like}', 'LikesController@destroy');
+
+Route::get('/tags/{id}/article', 'User\ArticleController@showByTag')->name('tags.article');
 
 //Route::get('/mypage/{name}', 'User\ArticleController@index');

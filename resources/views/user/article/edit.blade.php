@@ -19,13 +19,13 @@
                     <div class="form-group row">
                         <label class="col-lg-2" for="title">タイトル</label> 
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" name="title" value="{{ $article->title }}">
+                            <input type="text" class="form-control mobtext" name="title" value="{{ $article->title }} ">
                         </div>
                     </div>
                      <div class="form-group row">
                         <label class="col-lg-2" for="genre">ジャンル</label> 
                         <div class="col-lg-10">
-                            <select class="form-control" name="genre">
+                            <select class="form-control mobtext" name="genre">
                                 <option value="{{ $article->genre }}">
                                 @if($article->genre == "music")
                                     音楽
@@ -59,12 +59,44 @@
                     <div class="form-group row">
                         <label class="col-lg-2" for="body">本文</label>
                         <div class="col-lg-10">
-                            <textarea class="form-control" name="body" rows="20">{{ $article->body }}</textarea>
+                            <textarea class="form-control mobtext" name="body" rows="20">{{ $article->body }}</textarea>
                         </div>
                     </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-lg-2" for="name">タグの追加</label> 
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control mobtext" name="name" value="">
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-10">
+                            <span>※タグを複数設定する場合は半角スペースかカンマ(,)で区切ってください</span>
+                        </div>
+                    </div>
+                    @if(count($article->Tags) > 0)
+                        <div class="form-group row">
+                            <label class ="col-lg-2">タグの削除</label>
+                            <div class="col-lg-10">
+                                @foreach($article->Tags as $tag)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="{{ $tag->id }}"  name="tagc[]" value="{{ $tag->id }}">
+                                        <label class="form-check-label" for="{{ $tag->id }}">
+                                            <span class="badge badge-pill badge-dark">
+                                                <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> {{ $tag->name }}
+                                            </span>
+                                        </label>    
+                                    </div>
+                                @endforeach
+                            </div>
+                            <span class="col-lg-2"></span>
+                            <div class="col-lg-10">
+                                <input type="submit" class="btn btn-danger" name="tagd" value="チェックしたタグを削除">
+                            </div>    
+                        </div>
+                    @endif
 
                     {{ csrf_field() }}
-                    <input type="submit" class="btn btn-primary" value="更新">
+                    <input type="submit" class="btn btn-primary" name="update" value="更新">
                 </form>
             </div>
         </div>

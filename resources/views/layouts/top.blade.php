@@ -13,6 +13,7 @@
     <!-- Scripts -->
     <script src="{{ secure_asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/d93ad57f7f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -41,33 +42,48 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/introduction') }}">エクパンとは？</a>
+                            <a class="nav-link mob-text" href="{{ url('/introduction') }}">エクパンとは？</a>
                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <form class="form-inline mr-2" action="{{ action('User\ArticleController@search') }}" method="get">
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control" name="search_article" placeholder="記事検索">
+                                <div class="input-group-append">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-info"><i class="fas fa-search search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}"><button type="button" class="btn btn-outline-primary btn-sm">{{ __('messages.Login') }}</button></a>
+                                <a class="nav-link" href="{{ route('login') }}"><button type="button" class="btn btn-primary btn-sm">{{ __('messages.Login') }}</button></a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}"><button type="button" class="btn btn-outline-primary btn-sm">{{ __('messages.Register') }}</button></a>
+                                    <a class="nav-link" href="{{ route('register') }}"><button type="button" class="btn btn-primary btn-sm">{{ __('messages.Register') }}</button></a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle mob-text" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    @if(Auth::user()->image_path == 1)
+                                        <img src="{{$path}}{{ Auth::user()->id}}.jpg?{{time()}}" class="rounded-circle" width="30px" height="30px">
+                                    @else
+                                        <img src="{{ asset('/img/noimage.jpg') }}" class="rounded-circle" width="30px" height="30px">
+                                    @endif 
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/user/article/create') }}"><i class="fas fa-pen"></i> 記事を書く</a>
-                                    <a class="dropdown-item" href="{{ url('/user/article/index') }}"><i class="fas fa-book-open"></i> 記事一覧</a>
-                                    <a class="dropdown-item" href="{{ url('/user/profile/'.Auth::id().'/edit') }}"><i class="fas fa-address-card"></i> プロフィール編集</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item mob-text" href="{{ url('/user/article/create') }}"><i class="fas fa-pen"></i> 記事を書く</a>
+                                    <a class="dropdown-item mob-text" href="{{ url('/user/article/index') }}"><i class="fas fa-book-open"></i> 記事一覧</a>
+                                    <a class="dropdown-item mob-text" href="{{ url('/user/profile/'.Auth::id().'/edit') }}"><i class="fas fa-address-card"></i> プロフィール編集</a>
+                                    <a class="dropdown-item mob-text" href="{{ url('/user/article/likes/'.Auth::id()) }}"><i>♥</i> お気に入り記事</a>
+                                    <a class="dropdown-item mob-text" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="fas fa-running"></i> {{ __('messages.Logout') }}
@@ -98,6 +114,6 @@
             $('[data-toggle="popover"]').popover();
         });
     })();
-</script>
+    </script>
 </body>
 </html>

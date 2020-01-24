@@ -19,13 +19,14 @@
                     <div class="form-group row">
                         <label class="col-lg-2" for="title">タイトル</label> 
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                            <input type="text" class="form-control mobtext" name="title" value="{{ old('title') }}">
                         </div>
                     </div>
-                     <div class="form-group row">
+                    
+                    <div class="form-group row">
                         <label class="col-lg-2" for="genre">ジャンル</label> 
                         <div class="col-lg-10">
-                            <select class="form-control" name="genre" required>
+                            <select class="form-control mobtext" name="genre" required>
                                 <option>▼項目を選択してください</option>
                                 <option value="music">音楽</option>
                                 <option value="cinema">映画</option>
@@ -38,10 +39,22 @@
                             </select>
                         </div>
                     </div>
+                    
                     <div class="form-group row">
                         <label class="col-lg-2" for="body">本文</label>
                         <div class="col-lg-10">
-                            <textarea class="form-control" name="body" rows="20">{{ old('body') }}</textarea>
+                            <textarea class="form-control mobtext" name="body" rows="20">{{ old('body') }}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-lg-2" for="name">タグ</label> 
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control mobtext" name="name" value="{{ old('name') }}">
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-10">
+                            <p>※タグを複数設定する場合は半角スペースかカンマ(,)で区切ってください</p>
                         </div>
                     </div>
 

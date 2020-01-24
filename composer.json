@@ -11,9 +11,11 @@
         "php": "^7.2",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
+        "kanazaca/counter-cache": "1.0.*",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
+        "laravelcollective/html": "^6.0",
         "league/flysystem-aws-s3-v3": "^1.0"
     },
     "require-dev": {
@@ -39,7 +41,8 @@
         },
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+            "app/Library"
         ]
     },
     "autoload-dev": {

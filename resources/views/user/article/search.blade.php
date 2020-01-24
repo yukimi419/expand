@@ -6,7 +6,11 @@
         <div class="row">
             <div class="col-md-9 col-11 mx-auto top-new">
                 <br>
-                <h4 class="mb-n1">記事一覧</h4>
+                @if($search_article != null)
+                    <h4>{{ $search_article }}で検索</4>
+                @else
+                    <h4>記事一覧</h4>
+                @endif
                 <div class="row">
                     @foreach($posts as $article)
                             <div class="col-md-12 border-bottom-0">
