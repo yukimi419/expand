@@ -184,9 +184,27 @@ class ArticleController extends Controller
   {
         $posts = Article::where('genre', $genre)->latest('created_at')->paginate(10);
         
+        if($genre == 'music'){
+            $genre_name = '音楽';    
+        }elseif($genre == 'cinema'){
+            $genre_name = '映画'; 
+        }elseif($genre == 'anime'){
+            $genre_name = 'アニメ';
+        }elseif($genre == 'game'){
+            $genre_name = 'ゲーム';
+        }elseif($genre == 'comic'){
+            $genre_name = '漫画';
+        }elseif($genre == 'food'){
+            $genre_name = '食べ物';
+        }elseif($genre == 'store'){
+            $genre_name = 'お店';
+        }elseif($genre == 'back'){
+            $genre_name = '裏ワザ';
+        }
+        
         $path = JobController::path();
         
-        return view('user.article.refine', compact('posts', 'path'));
+        return view('user.article.refine', compact('posts', 'genre_name', 'path'));
   }
   
   public function destroy(Article $article)
@@ -200,9 +218,11 @@ class ArticleController extends Controller
   {
         $posts = Tag::find($id)->articles()->latest('created_at')->paginate(10);
         
+        $tag_name = Tag::find($id)->name;
+        
         $path = JobController::path();
  
-        return view('user.article.refine', ['posts' => $posts, 'path' => $path]);
+        return view('user.article.tag', compact('posts', 'tag_name', 'path'));
   }
   
   public function search(Request $request)
@@ -217,25 +237,47 @@ class ArticleController extends Controller
   }
   
   public function monthly(User $user, $monthly)
-  { 
-        $yearMonth = User::find($user->id)->articls()->orderBy('created_at')->get()->groupBy(function ($row) {
+  {
+      
+        $posts = User::find($user->id)->articls()->latest('created_at')->get();
+        
+        $years = User::find($user->id)->articls()->orderBy('created_at')->get()->groupBy(function ($row) {
+                    return $row->created_at->format('Y');
+                 });
+      
+        $yearMonths = User::find($user->id)->articls()->orderBy('created_at')->get()->groupBy(function ($row) {
                         return $row->created_at->format('Ym');
                         });
+                        
+        foreach($years as $year => $data){
+            $yearCounts[$year] = $data->count();
+        }
         
-        $year = substr($monthly,0,4);
+        foreach($years as $year => $data){
+            $montlys = User::find($user->id)->articls()->whereYear('created_at', $year)->orderBy('created_at')->get()->groupBy(function ($row) {
+                    return $row->created_at->format('m');
+            });
+            $months[$year] =  $montlys;
+        }
         
-        $month = substr($monthly,4);
+        foreach($yearMonths as $yearMonth => $data){
+            $yearMonthCounts[$yearMonth] = $data->count();
+        }
         
-        if(substr($month,0,1) == '0'){
-            $month = substr($month,1);
+        $year_name = substr($monthly,0,4);
+        
+        $month_name = substr($monthly,4);
+        
+        if(substr($month_name,0,1) == '0'){
+            $month_name = substr($month_name,1);
         }
                         
-        $posts = $yearMonth[$monthly];
+        $month_posts = $yearMonths[$monthly];
         
                  
         $path = JobController::path();        
                  
-        return view('user.article.monthly', compact('posts', 'path', 'year', 'month'));         
+        return view('user.article.monthly', compact('month_posts', 'path', 'year_name', 'month_name', 'user', 'posts', 'years', 'months', 'yearCounts', 'yearMonthCounts'));         
   }
   
   public function likes(User $user){

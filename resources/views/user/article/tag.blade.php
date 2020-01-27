@@ -4,12 +4,12 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-11 mx-auto top-new">
+            <div class="col-md-9 col-11 mx-auto top-new">
                 <br>
-                <h4>{{ $year_name }}年{{ $month_name }}月の記事一覧</4>
+                <h4 class="mb-n1 title">タグ「{{ $tag_name }}」一覧</h4>
                 <div class="row">
-                    @foreach($month_posts as $key => $article)
-                            <div class="col-md-12  border-bottom-0">
+                    @foreach($posts as $article)
+                            <div class="col-md-12 border-bottom-0">
                                 <hr>
                                 <div class="clearfix">
                                     <div class="float-left ml-2 mr-2">
@@ -22,29 +22,29 @@
                                     <div>
                                         <h6>{{ $article->created_at->format('Y年m月d日')}}</h6>
                                     </div>
-                                    <div class="mt-n2 mb-2">
+                                    <div class="mb-2 mt-n2">
                                         @if($article->genre == "music")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-primary align-middle mon-genre">音楽</a><br> 
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-primary align-middle">音楽</a><br> 
                                         @elseif($article->genre == "cinema")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-secondary align-middle mon-genre">映画</a><br>
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-secondary align-middle">映画</a><br>
                                         @elseif($article->genre == "anime")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-mazenta align-middle mon-genre">アニメ</a><br>    
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-mazenta align-middle">アニメ</a><br>    
                                         @elseif($article->genre == "game")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-success align-middle mon-genre">ゲーム</a><br>
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-success align-middle">ゲーム</a><br>
                                         @elseif($article->genre == "comic")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-danger align-middle mon-genre">漫画</a><br>
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-danger align-middle">漫画</a><br>
                                         @elseif($article->genre == "food")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-warning align-middle mon-genre">食べ物</a><br>
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-warning align-middle">食べ物</a><br>
                                         @elseif($article->genre == "store")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-info align-middle genre-top mon-genre">お店</a><br>
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-info align-middle genre-top">お店</a><br>
                                         @elseif($article->genre == "back")
-                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-dark align-middle genre-top mon-genre">裏ワザ</a><br>
+                                            <a href="{{ url('article/genre/'.$article->genre) }}" class="badge badge-dark align-middle genre-top">裏ワザ</a><br>
                                         @endif
                                     </div>
                                     <div>
                                         <h5 class="align-middle title"><a class="text-reset text-decoration-none font-weight-bold" href="{{ url('article/'.$article->id) }}">{{ Str::limit($article->title, 60) }}</a></h5>
                                     </div>
-                                    <div class="text-right name title">
+                                    <div class="text-right title">
                                             <a href="{{ url('profile/'.$article->user->id) }}" class="card-link">
                                                 @if($article->user->image_path == 1)
                                                     <img src="{{$path}}{{$article->user->id}}.jpg?{{time()}}" class="rounded-circle pc" width="30px" height="30px">
@@ -60,9 +60,12 @@
                 </div>
                 
             </div>
-            <div class="col-md-4 mx-auto">
-                @include('layouts.right')
+            <div class="col-md-3">
+                
             </div>
+        </div>
+        <div class="mt-3 ">
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection

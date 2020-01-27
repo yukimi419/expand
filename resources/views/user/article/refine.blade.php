@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-9 col-11 mx-auto top-new">
                 <br>
-                <h4 class="mb-n1">記事一覧</h4>
+                <h4 class="mb-n1 title">{{ $genre_name }}一覧</h4>
                 <div class="row">
                     @foreach($posts as $article)
                             <div class="col-md-12 border-bottom-0">
